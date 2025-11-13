@@ -21,5 +21,7 @@ There are also variables that are weakly correlated/not correlated with drop out
 
 # What issues or open questions remain?
 There is a class imbalance in the dataset because the majority of students have graduated, followed by dropped out and enrolled. I want to focus on factors that contribute to dropout, so I'm thinking about combining "graduate" and "enrolled" students together, so that the students could be split into either dropout or not dropout.    
+
 Some of the variables also have a class imbalance, and I'm think I want to avoid using these in my model. For example, when I tried to see if there was any correlation between nationality and dropout, I found out that a large proportion of students were Portugese.   
+
 There are some variables with many categories, and I want to group some of the categories together because I think some of them have similar correlations to dropout. But I would need to spend more time thinking about how I want to group them together and check how the groupings would affect my model performance. 

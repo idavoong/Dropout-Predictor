@@ -36,6 +36,6 @@ Although precision is lower compared to a random forest model or xgboost, recall
 
 ## Future Improvements
 
-To further improve my KNN model, I plan to tune the number of neighbors to optimize precision. Additionally, I am interested in exploring clustering techniques to group similar students or aggregate related variables, which may enhance model performance.
+To further improve my KNN model, I plan to tune the number of neighbors to optimize precision. Additionally, I am interested in exploring clustering techniques to group similar students or aggregate related variables, which may enhance model performance by reducing redundant features or noise. 
 
 Although my random forest model currently shows lower recall and F1 scores, I aim to improve its effectiveness through feature engineering (like the ones for my KNN model) and by experimenting with the number of trees (estimators). These adjustments may help the model better capture important patterns and address class imbalance, and hopefully perform better than my KNN.

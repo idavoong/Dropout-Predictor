@@ -1,41 +1,67 @@
-# Baseline Model
+Predicting Student Dropout Using Machine Learning   
+by Ida Voong
 
-Predict that all students will drop out
+[Presentation](https://docs.google.com/presentation/d/1tpiimvbTDf-AU9pH94EAs_B8Wa9tXrFq587ooCkTHrk/edit?usp=sharing)
 
-![Baseline Classification Report](image.png)
 
-Predict that all students will not drop out
+# Problem
+Completing a college degree is strongly associated with lower unemployment rates, and many careers now require at least a bachelor's degree. A college education is essential for economic stability and upward mobility. 
 
-![alt text](image-6.png)
+Despite these benefits, a significant number of students leave college before earning a degree, which impacts their future employment opportunities and earning potential. Understanding why students dropout is vital for developing effective interventions that support student success.
 
-## Strengths and Weaknesses
+# Dataset
 
-Strengths:  
-My baseline model is easy to implement, and it provides a reference point to compare more complex models. Ideally, the models I develop should perform better than the baseline.
+[Link to Dataset](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
 
-Weakness:  
-There is a class imbalance between students who drop out and students who do not drop out. This means that the accuracy rate is deceptively high when I predict for students who do not drop out.
+Size: 4424
 
-# Current Model
+Key Variables: marital status, previous education level, nationality, gender, age, admission grade, parents' education level and occupation, grades, curriculum, debt, tuition payment, number of units enrolled in
 
-![KNN Classification Report](image-2.png)
-![PR Curve](image-3.png)
-![ROC Curve](image-4.png)
+Target Variable Values: dropout, graduate, enrolled
 
-Features used:
+In the initial data exploration, I noticed that there are some variables that have a strong correlation with dropout rate:
 
+![debt](image-12.png)
+![tuition fees](image-13.png)
+![day/evening](image-14.png)
+
+My main focus is on predicting dropout, so I merged together students who have graduated, or are currently enrolled, such that the target variable is dropout vs not dropout. 
+
+The dataset is split such that 80% is used for training and 20% for testing.
+
+# Model
+
+## Baseline Model
+The baseline model predicts that all students will dropout. 
+
+![Baseline Results](image-7.png)
+
+## Best Model
+My best model is a KNN that uses 15 neighbors. The features used in this model are: 
 - Daytime/evening attendance
 - Debtor
 - Tuition fees up to date
 - Gender
 - Scholarship holder
+- Curricular units 1st sem (grade)
+- Curricular units 2nd sem (grade)
 
-Currently, my best model is a KNN based model.
-Although precision is lower compared to a random forest model or xgboost, recall and f1 score significantly better. This is the classification report for my random forest model for comparison:  
-![RF Classification Report](image-5.png)
+These features are processed using one hot encoder and standard scalar before they are fed into the KNN model. 
 
-## Future Improvements
+![Model Results](image-8.png)
 
-To further improve my KNN model, I plan to tune the number of neighbors to optimize precision. Additionally, I am interested in exploring clustering techniques to group similar students or aggregate related variables, which may enhance model performance by reducing redundant features or noise. 
+![Confusion Matrix](image-9.png)
 
-Although my random forest model currently shows lower recall and F1 scores, I aim to improve its effectiveness through feature engineering (like the ones for my KNN model) and by experimenting with the number of trees (estimators). These adjustments may help the model better capture important patterns and address class imbalance, and hopefully perform better than my KNN.
+![PR Curve](image-10.png)
+
+![ROC Curve](image-11.png)
+
+The model is evaluated using precision, recall, and f1-score to determine how well it can predict whether or not a student will drop out. 
+
+
+# Analysis
+A student's financial situation strongly indicates whether or not they will dropout. We can see this correlation in the initial data exploration. Students with debt have a significantly higher chance of dropping out than those who do not. Similarily, students who have not paid their tuition on time are also likely to dropout. Whether or not a student holds a scholarship diretly affects how likely they are to pay their tuition.
+
+Whether or not a student attends class during the day or evening is also correlated with increased dropout. I hypothesize that students who attend class in the evening may have other priorities that they tend to during the day, such as work. 
+
+Lower grades also indicate a higher dropout rate. Students who perform poorly in their classes and/or cannot maintain a certain GPA may be forced to dropout of college.
